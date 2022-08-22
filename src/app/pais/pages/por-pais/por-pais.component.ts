@@ -12,8 +12,9 @@ export class PorPaisComponent implements OnInit {
   hayError: boolean = false;
   paises: Country[] = [];
 
-  buscar(): void {
+  buscar(termino: string): void {
     this.hayError = false;
+    this.termino = termino;
     // Para que un Observable se ejecute debo de estar suscrito
     this.paisService.buscarPais(this.termino)
         .subscribe({
