@@ -12,6 +12,7 @@ export class PorPaisComponent implements OnInit {
   hayError: boolean = false;
   paises: Country[] = [];
 
+  // Hace el llamado al api mediante el servicio
   buscar(termino: string): void {
     this.hayError = false;
     this.termino = termino;
@@ -26,6 +27,10 @@ export class PorPaisComponent implements OnInit {
             this.paises = [];
           }
         });
+  }
+
+  sugerencias(termino: string) {
+    this.hayError = false;
   }
 
   constructor(

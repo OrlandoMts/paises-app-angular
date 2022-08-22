@@ -2,7 +2,10 @@
 <hr>
 <div class="row">
     <div class="col">
-        <app-pais-input (newInputEvent)="buscar($event)"></app-pais-input>
+        <app-pais-input 
+            (newInputEvent)="buscar($event)"
+            (onDebounce)="sugerencias($event)">
+        </app-pais-input>
     </div>
 </div>
 
