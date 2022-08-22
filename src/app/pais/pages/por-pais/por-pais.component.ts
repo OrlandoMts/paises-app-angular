@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Country } from '../../interfaces/pais.interface';
 import { PaisService } from '../../services/pais.service';
 
 @Component({
@@ -8,10 +9,22 @@ import { PaisService } from '../../services/pais.service';
 export class PorPaisComponent implements OnInit {
 
   termino: string = '';
+  hayError: boolean = false;
+  paises: Country[] = [];
 
   buscar(): void {
+    this.hayError = false;
     // Para que un Observable se ejecute debo de estar suscrito
-    this.paisService.buscarPais(this.termino).subscribe( resp => console.log(resp));
+    this.paisService.buscarPais(this.termino)
+        .subscribe({
+          next: (paises) =>{ 
+            this.paises = paises;
+            console.warn(paises)},
+          error: (e) => {
+            this.hayError = true;
+            this.paises = [];
+          }
+        });
   }
 
   constructor(
