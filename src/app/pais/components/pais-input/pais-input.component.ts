@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { debounceTime, Subject } from 'rxjs';
 
 @Component({
@@ -10,6 +10,7 @@ export class PaisInputComponent implements OnInit {
   @Output() newInputEvent: EventEmitter<string> = new EventEmitter();
   // rxjs viene con un Observable especial llamado "el subject"
   @Output() onDebounce: EventEmitter<string> = new EventEmitter();
+  @Input() placeholder: string = 'Buscar';
 
   debouncer: Subject<string> = new Subject();
 
