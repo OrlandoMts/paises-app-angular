@@ -24,6 +24,11 @@ export class PaisService {
     return this.http.get<Country[]>(url)
   }
 
+  buscarRegion(region: string): Observable<Country[]>{
+    const url = `${this._apiUrl}/region/${region}`;
+    return this.http.get<Country[]>(url);
+  }
+
   getCountryById(idCountry: string): Observable<Country[]>{
     const url = `${this._apiUrl}/alpha/${idCountry}`
     return this.http.get<Country[]>(url)
