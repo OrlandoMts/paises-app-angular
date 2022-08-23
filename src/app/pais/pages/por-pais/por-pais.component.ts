@@ -12,10 +12,15 @@ export class PorPaisComponent implements OnInit {
   hayError: boolean = false;
   paises: Country[] = [];
 
+  paisesSugeridos: Country[] = [];
+  mostrarSugeridos: boolean = false;
+
   // Hace el llamado al api mediante el servicio
   buscar(termino: string): void {
     this.hayError = false;
     this.termino = termino;
+    
+    this.mostrarSugeridos = false;
     // Para que un Observable se ejecute debo de estar suscrito
     this.paisService.buscarPais(this.termino)
         .subscribe({
@@ -30,7 +35,17 @@ export class PorPaisComponent implements OnInit {
   }
 
   sugerencias(termino: string) {
+    // Todo esto es gracias a debounce
     this.hayError = false;
+    this.termino = termino;
+
+    this.mostrarSugeridos = true;
+
+    this.paisService.buscarPais(termino)
+        .subscribe({
+          next: paises => this.paisesSugeridos = paises.splice(0,5),
+          error: error => this.paisesSugeridos = []
+        })
   }
 
   constructor(
